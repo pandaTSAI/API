@@ -1,6 +1,5 @@
 package com.home.api;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -16,12 +15,7 @@ import net.sf.json.JSONObject;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -56,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void OKHttpdata() {
+//        new Task().execute("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-35227179-8C6E-40CC-9E0A-ADC7DE41DF64&locationName=%E8%87%BA%E5%8C%97%E5%B8%82&elementName=MinT");
+
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-35227179-8C6E-40CC-9E0A-ADC7DE41DF64&locationName=%E8%87%BA%E5%8C%97%E5%B8%82&elementName=MinT")
@@ -177,34 +173,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class TransTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... strings) {
-            StringBuilder sb = new StringBuilder();
-
-            try {
-                URL url = new URL(strings[0]);
-                InputStream is = url.openStream();
-                BufferedReader in = new BufferedReader(new InputStreamReader(is));
-                //readLine 讀到跳行字元
-                String line = in.readLine();
-                while (line != null) {
-                    sb.append(line);
-                    line = in.readLine();
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return sb.toString();
-        }
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.d(TAG, "onPostExecute: " + s);
-        }
-    }
+//    public class Task extends AsyncTask<String, Void, String> {
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            StringBuilder sb = new StringBuilder();
+//
+//            try {
+//                URL url = new URL(strings[0]);
+//                InputStream is = url.openStream();
+//                BufferedReader in = new BufferedReader(new InputStreamReader(is));
+//                //readLine 讀到跳行字元
+//                String line = in.readLine();
+//                while (line != null) {
+//                    sb.append(line);
+//                    line = in.readLine();
+//                }
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return sb.toString();
+//        }
+//        @Override
+//        protected void onPostExecute(String s) {
+//            super.onPostExecute(s);
+//            Log.d(TAG, "onPostExecute: " + s);
+//        }
+//    }
 
 }
 
